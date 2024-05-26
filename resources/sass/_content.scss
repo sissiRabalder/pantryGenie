@@ -1,0 +1,70 @@
+
+.content-bg {
+  background-color: $content-bg;
+} 
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+  color: $body-bg;
+}
+.overview-card {
+  border-radius: 10px;
+  color: $white;
+  .overview-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+}
+
+
+.scaner-box {
+  margin: auto;
+  width: 300px;
+   height: 280px;
+
+}
+
+
+
+#scanner-container {
+  position: relative;
+  padding: 5px;
+  width: 300px;
+  height: 240px;
+  background-color: $content-bg;
+  border-radius: 1rem;
+
+  video {
+    width: 280px;
+    height: 230px;
+    border-radius: 1rem;
+    overflow: hidden;
+    vertical-align: bottom;
+
+  }
+
+  .line {
+    position: absolute;
+    top: 5%; /* Initiale Position */
+    left: 0;
+    background-color: #d8bfd8; /* Beispielwert, ersetze $lilac durch tatsächliche Farbe */
+    width: 100%; /* Passe die Breite an die des Containers an */
+    height: 3px;
+    border-radius: 1rem;
+    opacity: 1;
+    &.animate {
+      animation: move 1s infinite ease-in-out alternate;
+    }
+  }
+
+
+}
+  @keyframes move {
+    0% {
+      top: 5%;
+    }
+    100% {
+      top: 95%;
+    }
+    
+  }
