@@ -15,19 +15,17 @@
                 <div class="overview-card card-body content-bg">
                     <h5 class="card-title">Artikelübersicht</h5>
                     <div class="row p-3">
-                        <div class="col-5"><img class="overview-circle" src="/images/kreis.svg" alt=""></div>
-
-                        <div class="col-7">
-                       
-
-                            <ul>
-                                <li>Abgelaufen</li>
-                                <li>Lauft bald ab</li>
-                                <li>Haltbar</li>
-                                <li>Kein Datum</li>
-                            </ul>
+                        <div class="col-12 col-md-5 align-self-center">
+                            <div class="chart-container">
+                                <canvas id="myPieChart"></canvas>
+                            </div>
+                            <div style="opacity: 0;">
+                                <p class="d-inline" id="expired">{{ $expiredItemsCount }}</p>
+                                <p class="d-inline" id="expiringSoon">{{ $expiringSoonItemsCount }}</p>
+                                <p class="d-inline" id="remaining">{{ $remainingItemsCount }}</p>
+                                <p class="d-inline" id="noDate">{{ $noDateItemsCount }}</p>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -35,8 +33,8 @@
         <div class="col-6">
             <div class="card text-white content-bg">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="">With supporting text below as a natural lead-in to additional content.</p>
+                    <h5 class="card-title">Vorratskammer</h5>
+                    <p class="">Schau was du alles in deiner Vorratskammer hast</p>
                     <a href="{{ route('items.show')}}" class="btn btn-primary">Voratskammer</a>
                 </div>
             </div>
@@ -44,8 +42,8 @@
         <div class="col-6">
             <div class="card text-white content-bg">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <h5 class="card-title">Hinzufügen</h5>
+                    <p class="card-text">Nur wenn du deine Vorratskammer am aktuellen Stand haltest, behälts du die volle übersicht.</p>
                     <a href="{{ route('item.create')}}" class="btn btn-primary">Artikel Hinzufügen</a>
                 </div>
             </div>
@@ -58,4 +56,5 @@
     </div>
     @endif
 </div>
+
 @endsection

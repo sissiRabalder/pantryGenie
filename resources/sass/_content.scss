@@ -3,6 +3,11 @@
   background-color: $content-bg;
 } 
 
+.chart-container {
+    width: 90%;
+    margin: auto;
+}
+
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
   color: $body-bg;
 }

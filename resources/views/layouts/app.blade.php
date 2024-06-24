@@ -48,8 +48,19 @@
                         </li>
                         @endif
                         @else
+
                         <li class="nav-item">
-                            <a id="" class="nav-link text-white" href="#" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="" class="nav-link text-white" href="{{ route('home') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="" class="nav-link text-white" href="{{ route('items.show') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Vorratskammer
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="" class="nav-link text-white" href="{{ route('home') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
                         </li>
@@ -64,11 +75,7 @@
                             </form>
 
                         </li>
-                        <li class="nav-item">
-                            <a id="" class="nav-link text-white" href="  {{ route('profile.edit') }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Profil bearbeiten
-                            </a>
-                        </li>
+
                         @endguest
                     </ul>
                 </div>

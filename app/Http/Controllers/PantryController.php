@@ -27,9 +27,96 @@ class PantryController extends Controller
         //  angemeldeten Benutzer abrufen
         $user = Auth::user();
         $pantry = $user->pantry;
-        $items = $pantry->items ?? [];
+        $items = $pantry->items ?? collect();
         //$item = Item::find($item);
-        return view('pantry.pantry', ['user' => $user, 'pantry' => $pantry, 'items' => $items]);
+        
+
+        // Ablaufdatum:
+
+        // Aktuelles Datum
+        $today = now();
+        // Datum in einer Woche
+        $nextWeek = now()->addWeek();
+
+        // Abgelaufene Produkte
+        $expiredItems = $items->filter(function ($item) use ($today) {
+                return $item->expiry_date && $item->expiry_date < $today;
+            });
+
+        // Produkte, die in einer Woche ablaufen
+        $expiringSoonItems = $items->filter(function ($item) use ($today, $nextWeek) {
+            return $item->expiry_date && $item->expiry_date >= $today && $item->expiry_date <= $nextWeek;
+        });
+
+        // Produkte ohne Ablaufdatum
+        $noDateItems = $items->filter(function ($item) {
+                return !$item->expiry_date;
+            });
+
+        // Produkte, die nicht abgelaufen sind und nicht bald ablaufen
+        $remainingItems = $items->filter(function ($item) use ($today, $nextWeek) {
+            return $item->expiry_date && $item->expiry_date > $nextWeek;
+        });
+
+        $sortedItems = $items->sortBy('expiry_date');
+
+        return view('pantry.pantry', [
+            'user' => $user,
+            'pantry' => $pantry,
+            'items' => $sortedItems,
+            'expiredItemsCount' => $expiredItems->count(),
+            'expiringSoonItemsCount' => $expiringSoonItems->count(),
+            'noDateItemsCount' => $noDateItems->count(),
+            'remainingItemsCount' => $remainingItems->count(),
+        ]);
+    }
+
+    public function showExpiresItems() {
+        //  angemeldeten Benutzer abrufen
+        $user = Auth::user();
+        $pantry = $user->pantry;
+        $items = $pantry->items ?? collect();
+        //$item = Item::find($item);
+        
+
+        // Ablaufdatum:
+
+        // Aktuelles Datum
+        $today = now();
+        // Datum in einer Woche
+        $nextWeek = now()->addWeek();
+
+        // Abgelaufene Produkte
+        $expiredItems = $items->filter(function ($item) use ($today) {
+                return $item->expiry_date && $item->expiry_date < $today;
+            });
+
+        // Produkte, die in einer Woche ablaufen
+        $expiringSoonItems = $items->filter(function ($item) use ($today, $nextWeek) {
+            return $item->expiry_date && $item->expiry_date >= $today && $item->expiry_date <= $nextWeek;
+        });
+
+        // Produkte ohne Ablaufdatum
+        $noDateItems = $items->filter(function ($item) {
+                return !$item->expiry_date;
+            });
+
+        // Produkte, die nicht abgelaufen sind und nicht bald ablaufen
+        $remainingItems = $items->filter(function ($item) use ($today, $nextWeek) {
+            return $item->expiry_date && $item->expiry_date > $nextWeek;
+        });
+
+        $sortedItems = $items->sortBy('expiry_date');
+
+        return view('home', [
+            'user' => $user,
+            'pantry' => $pantry,
+            'items' => $sortedItems,
+            'expiredItemsCount' => $expiredItems->count(),
+            'expiringSoonItemsCount' => $expiringSoonItems->count(),
+            'noDateItemsCount' => $noDateItems->count(),
+            'remainingItemsCount' => $remainingItems->count(),
+        ]);
     }
 
     public function showItem($id) {
@@ -114,7 +201,7 @@ class PantryController extends Controller
     public function editItem($id)
     {
         $item = Item::findOrFail($id);
-        return view('editItem', ['item' => $item]);
+        return view('pantry.editItem', ['item' => $item]);
     }
 
 

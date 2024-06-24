@@ -19,6 +19,8 @@ app.component('example-component', ExampleComponent);
 
 import './quagga'
 
+import './card'
+
 
 /**
  * The following block of code may be used to automatically register your

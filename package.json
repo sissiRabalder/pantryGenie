@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@ericblade/quagga2": "^1.8.4",
+        "chart.js": "^4.4.3",
         "node.js": "^0.0.1-security",
         "quagga": "^0.6.16"
     }

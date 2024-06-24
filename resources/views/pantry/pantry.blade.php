@@ -23,7 +23,15 @@
                         <div class="m-2">{{ $item->weight }}{{ $item->unit }}</div>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
+                        @php
+                        $currentDate = \Carbon\Carbon::now();
+                        $expiryDate = \Carbon\Carbon::parse($item->expiry_date);
+                        @endphp
+                        @if ($currentDate  > $expiryDate)
+                        <div style="color: #7B68EE;">ABGELAUFEN Verbrauchen bis: {{ $item->expiry_date }}</div>
+                        @else
                         <div>Verbrauchen bis: {{ $item->expiry_date }}</div>
+                        @endif
                         <a class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $item->id }}" aria-expanded="true" aria-controls="collapseOne">Details</a>
                     </div>
                     <div id="collapse{{ $item->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">

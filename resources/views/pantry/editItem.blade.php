@@ -42,7 +42,7 @@
                         <div class="row mb-3">
                             <label for="expiry_date" class="col-md-4 col-form-label text-md-end">{{ __('Ablaufdatum') }}</label>
                             <div class="col-md-6">
-                                <input id="expiry_date" type="date" class="text-white form-control" name="expiry_date" value="{{ $item->expiry_date }}" required autocomplete="expiry_date">
+                                <input id="expiry_date" type="date" class="text-white form-control" name="expiry_date" value="{{ $item->expiry_date }}" autocomplete="expiry_date">
                             </div>
                         </div>
 

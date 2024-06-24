@@ -4,16 +4,19 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PantryController;
 
-Route::get('/', function () {
-    return view('home');
-});
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\PantryController::class, 'showExpiresItems'])->name('home');
 
 Auth::routes();
 
 
 //Route, Controller, Methode
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\PantryController::class, 'showExpiresItems'])->name('home');
+
 
 Route::get('/pantry/', [App\Http\Controllers\PantryController::class, 'showItems'])->name('items.show');
 
