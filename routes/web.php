@@ -34,7 +34,8 @@ Route::get('/profile/edit', [App\Http\Controllers\ProfileController::class, 'edi
 Route::post('/profile/update', [App\Http\Controllers\ProfileController::class, 'updateProfile'])->name('profile.update');
 
 
-
+// Übergibt Barcode an Controller
 Route::post('/scan-code', [App\Http\Controllers\PantryController::class, 'scanCode'])->name('scanCode');
+
 Route::get('/show-results', [App\Http\Controllers\PantryController::class, 'showResults'])->name('showResults');
 

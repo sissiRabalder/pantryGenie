@@ -78,7 +78,6 @@ class PantryController extends Controller
         $items = $pantry->items ?? collect();
         //$item = Item::find($item);
         
-
         // Ablaufdatum:
 
         // Aktuelles Datum
@@ -106,12 +105,12 @@ class PantryController extends Controller
             return $item->expiry_date && $item->expiry_date > $nextWeek;
         });
 
-        $sortedItems = $items->sortBy('expiry_date');
+       // $sortedItems = $items->sortBy('expiry_date');
 
         return view('home', [
             'user' => $user,
-            'pantry' => $pantry,
-            'items' => $sortedItems,
+            //'pantry' => $pantry,
+            //'items' => $sortedItems,
             'expiredItemsCount' => $expiredItems->count(),
             'expiringSoonItemsCount' => $expiringSoonItems->count(),
             'noDateItemsCount' => $noDateItems->count(),
@@ -126,14 +125,15 @@ class PantryController extends Controller
 
     public function scanItem()
     {
-       
         return view('pantry.scan', ['redirect' => route('showResults')]);
     }
 
 
     public function scanCode(Request $request)
     {
+        // Barcode ist gescannter Barcode
         $barcode = $request->input('barcode');
+        // array abgespeichert mit Daten werden an Methode show results übergeben
         $arr = OpenFoodFacts::barcode($barcode);
         session(['scan_results' => $arr]);
         return response()->json(['redirect' => route('showResults')]);
@@ -141,11 +141,11 @@ class PantryController extends Controller
 
     public function showResults()
     {
-       
         $results = session('scan_results', []);
         //product_name
         //dd($results); 
         //$results['generic_name_de'] ||
+        // Hier werden die einzelnen Daten aus dem Array gezogen
         $name = isset($results['product_name_de']) ? $results['product_name_de'] : ''; 
         $product_quantity = isset($results['product_quantity']) ? $results['product_quantity'] : '';
         $quantity = isset($results['quantity']) ? $results['quantity'] : '';

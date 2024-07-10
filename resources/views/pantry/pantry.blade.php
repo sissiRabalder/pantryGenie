@@ -40,7 +40,6 @@
                             <div>Kategorie: Mehl</div>
                             <div>Hinzugefügt am: {{ $item->created_at }}</div>
                         </div>
-
                         <div class="button-container m-3 d-flex">
                             <div class="button-container mt-3">
                                 <a href="{{ route('item.edit', $item->id) }}" class="btn btn-primary">Bearbeiten</a>
@@ -52,7 +51,6 @@
                                 <button style="margin-left:10px;" class="btn btn-primary mt-3" type="submit">Löschen</button>
                             </form>
                         </div>
-
                     </div>
 
                 </div>

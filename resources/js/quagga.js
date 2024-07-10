@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d', { willReadFrequently: true });
-
- 
   }
 
   Quagga.onDetected(function (result) {
@@ -46,8 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
         'Content-Type': 'application/json',
         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       },
+      // Übergibt Variable Barcode mit wert Code an Route /scan code welche definiert ist als post
       body: JSON.stringify({ barcode: code })
     })
+
       .then(response => response.json())
       .then(data => {
         console.log('Ergebnis von der API:', data);
